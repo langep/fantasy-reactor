@@ -2,7 +2,7 @@
 using Mirror;
 using UniRx;
 
-namespace FR.Tools.Network
+namespace FR.Tools.Networks
 {
     public class ObservableNetworkManager: NetworkManager
     {

@@ -1,0 +1,17 @@
+{
+    "name": "FR.Game",
+    "rootNamespace": "FR",
+    "references": [
+        "GUID:713c76873308c3c45bc280813022c9ea",
+        "GUID:78e797857edc42344b10eff67b5b37f8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
