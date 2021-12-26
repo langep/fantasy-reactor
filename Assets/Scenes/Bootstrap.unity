@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efaee00b2cf240e9aa33f20fe5627c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 15, y: 15}
+  size: {x: 10, y: 10}
   cellDim: {x: 1, y: 1}
   orientation: 0
 --- !u!4 &740527632
@@ -184,6 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useCullingMasks: 0
   board: {fileID: 740527631}
+  Size: {x: 10, y: 10}
   bottomLeft: {x: 0, y: 0, z: 0}
   bottomRight: {x: 10, y: 0, z: 0}
   topLeft: {x: 0, y: 0, z: 10}
@@ -251,7 +252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1878372925454402918, guid: ddee90db874f1c948ac3f8ee454ca90b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.022
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1878372925454402918, guid: ddee90db874f1c948ac3f8ee454ca90b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -583,6 +584,18 @@ PrefabInstance:
     - target: {fileID: 1878372925454402918, guid: ddee90db874f1c948ac3f8ee454ca90b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237237841817931858, guid: ddee90db874f1c948ac3f8ee454ca90b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237237841817931858, guid: ddee90db874f1c948ac3f8ee454ca90b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306417607601720668, guid: ddee90db874f1c948ac3f8ee454ca90b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddee90db874f1c948ac3f8ee454ca90b, type: 3}

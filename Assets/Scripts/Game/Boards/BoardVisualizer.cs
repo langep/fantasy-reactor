@@ -8,6 +8,7 @@ namespace FR.Game.Boards
     {
         [SerializeField] private Board board;
 
+        [SerializeField] private Vector2Int Size = new Vector2Int(5, 5);
         [SerializeField] private Vector3 bottomLeft = new Vector3(0, 0, 0);
         [SerializeField] private Vector3 bottomRight = new Vector3(5, 0, 0);
         [SerializeField] private Vector3 topLeft = new Vector3(0, 0, 5);
@@ -23,6 +24,7 @@ namespace FR.Game.Boards
 
         private void InitializeFromBoard()
         {
+            Size = board.Grid.Size;
             bottomLeft = board.Space.Grid2World(new Vector2Int(0,0));
             bottomRight = board.Space.Grid2World(new Vector2Int(board.Grid.Size.x, 0), validateCoords: false);
             topLeft = board.Space.Grid2World(new Vector2Int(0,board.Grid.Size.y), validateCoords: false);
@@ -39,10 +41,21 @@ namespace FR.Game.Boards
 
                 Draw.Matrix = transform.localToWorldMatrix;
 
-                Draw.Line( bottomLeft, bottomRight, Color.grey);
-                Draw.Line( bottomLeft, topLeft, Color.grey);
-                Draw.Line( bottomRight, topRight, Color.grey);
-                Draw.Line( topLeft, topRight, Color.grey);
+                var yOffset = (topLeft - bottomLeft) / (Size.y);
+                var xOffset = (bottomRight - bottomLeft) / (Size.x);
+                
+                // Horizontal lines
+                for (var i = 0; i < Size.y + 1; i++)
+                {
+                    Draw.Line( bottomLeft + i * yOffset, bottomRight + i * yOffset, Color.grey);
+                }
+                
+                // Vertical lines
+                for (var i = 0; i < Size.x + 1; i++)
+                {
+                    Draw.Line( bottomLeft + i * xOffset, topLeft + i * xOffset, Color.grey);
+                }
+
             }
 
         }
