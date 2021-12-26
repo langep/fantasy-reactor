@@ -377,7 +377,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 22.2
+  field of view: 26.5
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -596,6 +596,14 @@ PrefabInstance:
     - target: {fileID: 6306417607601720668, guid: ddee90db874f1c948ac3f8ee454ca90b, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306417607601720668, guid: ddee90db874f1c948ac3f8ee454ca90b, type: 3}
+      propertyPath: m_Center.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306417607601720668, guid: ddee90db874f1c948ac3f8ee454ca90b, type: 3}
+      propertyPath: m_Center.z
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddee90db874f1c948ac3f8ee454ca90b, type: 3}

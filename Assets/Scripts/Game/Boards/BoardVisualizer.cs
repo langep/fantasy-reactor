@@ -25,10 +25,11 @@ namespace FR.Game.Boards
         private void InitializeFromBoard()
         {
             Size = board.Grid.Size;
-            bottomLeft = board.Space.Grid2World(new Vector2Int(0,0));
-            bottomRight = board.Space.Grid2World(new Vector2Int(board.Grid.Size.x, 0), validateCoords: false);
-            topLeft = board.Space.Grid2World(new Vector2Int(0,board.Grid.Size.y), validateCoords: false);
-            topRight = board.Space.Grid2World(new Vector2Int(board.Grid.Size.x, board.Grid.Size.y), validateCoords: false);
+            var position = transform.position;
+            bottomLeft = board.Space.Grid2World(new Vector2Int(0,0)) - position;
+            bottomRight = board.Space.Grid2World(new Vector2Int(board.Grid.Size.x, 0), validateCoords: false) - position;
+            topLeft = board.Space.Grid2World(new Vector2Int(0,board.Grid.Size.y), validateCoords: false) - position;
+            topRight = board.Space.Grid2World(new Vector2Int(board.Grid.Size.x, board.Grid.Size.y), validateCoords: false) - position;
         }
         
         public override void DrawShapes( Camera cam ){

@@ -34,6 +34,8 @@ namespace FR.Game.Players
 
         protected void ConfirmSelectAndDeselect()
         {
+            if (_currentSelectable == null) return;
+            
             if (!_selector.Contains(_currentSelectable))
             {
                 _selector.ConfirmSelect(_currentSelectable);

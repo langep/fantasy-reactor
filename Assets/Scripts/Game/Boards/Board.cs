@@ -1,4 +1,5 @@
-﻿using FR.Tools.Grids;
+﻿using System;
+using FR.Tools.Grids;
 using UnityEngine;
 
 namespace FR.Game.Boards
@@ -12,11 +13,14 @@ namespace FR.Game.Boards
         public FixedSizeGrid2D<Cell> Grid { get; private set; }
         public Space2D<Cell> Space { get; private set; }
 
-        private void Start()
+        private void Awake()
         {
             Grid = new FixedSizeGrid2D<Cell>(size, Vector2Int.zero);
             Space = new Space2D<Cell>(Grid, cellDim, transform.position, orientation);
-            
+        }
+
+        private void Start()
+        {
             Grid.Initialize(CellFactory);
         }
 
