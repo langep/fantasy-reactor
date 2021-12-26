@@ -9,9 +9,15 @@ namespace FR.Game.Players
     public class RaycastUnitSelector : MonoBehaviour
     {
         [SerializeField] private Camera camera;
+        [SerializeField] private Selector.Config selectorConfig;
         
-        private Selector<SingleSelection> _selector = new Selector<SingleSelection>();
+        private Selector _selector;
         [CanBeNull] private Selectable _currentSelectable = null;
+
+        private void Start()
+        {
+            _selector = new Selector(new SingleSelection(), selectorConfig);
+        }
 
         private void BeginSelect([CanBeNull] Selectable selectable)
         {

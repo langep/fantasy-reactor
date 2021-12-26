@@ -1,50 +1,34 @@
 ﻿using FR.Tools.Selecting;
 using UnityEngine;
-using EPOOutline;
+using FR.Tools.Juice;
 
 namespace FR.Game.Units
 {
-    [RequireComponent(typeof(Outlinable))]
     public class UnitSelectable : Selectable
     {
 
-        [SerializeField] private Outlinable _outlinable;
-        
-        private void Awake()
+        [SerializeField] private Outline _outline;
+
+        protected override void OnBeginSelectSuccess()
         {
-            _outlinable = GetComponent<Outlinable>();
+            _outline.SetColor(Color.blue);
+            _outline.Show();
         }
 
-        protected override void OnBeginSelect(bool success)
+        protected override void OnConfirmSelectSuccess()
         {
-            Debug.Log($"OnBeginSelect: {success}");
-            if (success)
-            {
-                _outlinable.enabled = true;
-                _outlinable.OutlineParameters.Color = Color.blue;
-            }
+            _outline.SetColor(Color.green);
+            _outline.Show();
         }
 
-        protected override void OnConfirmSelect(bool success)
+        protected override void OnCancelSelectSuccess()
         {
-            Debug.Log($"OnConfirmSelect: {success}");
-            _outlinable.enabled = true;
-            _outlinable.OutlineParameters.Color = Color.green;
+            _outline.Hide();
         }
 
-        protected override void OnCancelSelect(bool success)
+        protected override void OnDeselectSuccess()
         {
-            Debug.Log($"OnCancelSelect: {success}");
-            if (!IsSelected)
-            {
-                _outlinable.enabled = false;
-            }
-        }
-
-        protected override void OnDeselect(bool success)
-        {
-            Debug.Log($"OnDeselect: {success}");
-            _outlinable.enabled = false;
+            _outline.Hide();
         }
     }
 }

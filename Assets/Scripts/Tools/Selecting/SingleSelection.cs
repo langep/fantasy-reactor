@@ -2,9 +2,13 @@
 {
     public class SingleSelection : Selection
     {
-        public override bool CanAdd(Selectable selectable)
+        public SingleSelection() : base()
         {
-            return IsEmpty();
+        }
+
+        public override bool HasRoomFor(uint count = 1)
+        {
+            return Count == 0;
         }
     }
 }

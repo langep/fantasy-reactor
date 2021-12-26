@@ -6,44 +6,45 @@ namespace FR.Tools.Selecting
     {
         public bool IsSelected { get; private set; }
 
-        public void BeginSelect(bool success)
+        public void BeginSelectSuccess()
         {
-            OnBeginSelect(success);
+            OnBeginSelectSuccess();
         }
 
-        public void ConfirmSelect(bool success)
+        public void ConfirmSelectSuccess()
         {
             IsSelected = true;
-            OnConfirmSelect(success);
+            OnConfirmSelectSuccess();
         }
 
-        public void CancelSelect(bool success)
+        public void CancelSelectSuccess()
         {
-            OnCancelSelect(success);
+            if (IsSelected) return;
+            OnCancelSelectSuccess();
         }
 
-        public void Deselect(bool success)
+        public void DeselectSuccess()
         {
             IsSelected = false;
-            OnDeselect(success);
+            OnDeselectSuccess();
         }
         
         
-        protected virtual void OnBeginSelect(bool success)
+        protected virtual void OnBeginSelectSuccess()
         {
             
         }
 
-        protected virtual void OnConfirmSelect(bool success)
+        protected virtual void OnConfirmSelectSuccess()
         {
             
         }
         
-        protected virtual void OnCancelSelect(bool success)
+        protected virtual void OnCancelSelectSuccess()
         {
         }
 
-        protected virtual void OnDeselect(bool success)
+        protected virtual void OnDeselectSuccess()
         {
         }
     }
