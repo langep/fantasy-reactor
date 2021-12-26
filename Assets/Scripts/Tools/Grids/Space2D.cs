@@ -7,42 +7,44 @@ namespace FR.Tools.Grids
     {
         private IGrid2D<TCell> _grid;
         private Orientation _orientation;
-        private Vector3 _origin;
-        private Vector2 _cellDimension;
+        public Vector3 Origin { get; private set; }
+        public Vector2 CellDimension { get; private set; }
 
         public Space2D(IGrid2D<TCell> grid, Vector2 cellDimension, Vector3 origin = default,
             Orientation orientation = Orientation.XZ)
         {
-            _cellDimension = cellDimension;
+            CellDimension = cellDimension;
             _grid = grid;
             _orientation = orientation;
-            _origin = origin;
+            Origin = origin;
         }
 
-        public Vector2Int World2Grid(Vector3 worldPos)
+        public Vector2Int World2Grid(Vector3 worldPos, bool validateCoords = true)
         {
             var position = FromWorldPosition(worldPos);
-            return new Vector2Int((int)position.x, (int)position.y);
+            var coords = new Vector2Int((int)position.x, (int)position.y);
+            if (!_grid.IsValidCoord(coords) && validateCoords) throw new ArgumentException("Invalid grid coordinates");
+            return coords;
         }
 
-        public Vector3 Grid2World(Vector2Int coords)
+        public Vector3 Grid2World(Vector2Int coords, bool validateCoords = true)
         {
-            if (!_grid.IsValidCoord(coords)) throw new ArgumentException("Invalid grid coordinates");
-            var position = coords * _cellDimension;
+            if (!_grid.IsValidCoord(coords) && validateCoords) throw new ArgumentException("Invalid grid coordinates");
+            var position = coords * CellDimension;
             return ToWorldPosition(position);
         }
 
         private Vector2 FromWorldPosition(Vector3 worldPosition) => _orientation switch
         {
-            Orientation.XZ => new Vector2(Mathf.Round((worldPosition.x - _origin.x) / _cellDimension.x), Mathf.Round((worldPosition.z - _origin.z) / _cellDimension.y)),
-            Orientation.XY => new Vector2(Mathf.Round((worldPosition.x - _origin.x) / _cellDimension.x), Mathf.Round((worldPosition.y - _origin.y) / _cellDimension.y)),
+            Orientation.XZ => new Vector2(Mathf.Round((worldPosition.x - Origin.x) / CellDimension.x), Mathf.Round((worldPosition.z - Origin.z) / CellDimension.y)),
+            Orientation.XY => new Vector2(Mathf.Round((worldPosition.x - Origin.x) / CellDimension.x), Mathf.Round((worldPosition.y - Origin.y) / CellDimension.y)),
             _ => throw new ArgumentException()
         };
         
         private Vector3 ToWorldPosition(Vector2 position) => _orientation switch
         {
-            Orientation.XZ => new Vector3(position.x + _origin.x, _origin.y, position.y + _origin.z),
-            Orientation.XY => new Vector3(position.x + _origin.x, position.y + _origin.y, _origin.z),
+            Orientation.XZ => new Vector3(position.x + Origin.x, Origin.y, position.y + Origin.z),
+            Orientation.XY => new Vector3(position.x + Origin.x, position.y + Origin.y, Origin.z),
             _ => throw new ArgumentException()
         };
 
