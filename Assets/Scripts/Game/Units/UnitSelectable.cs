@@ -4,29 +4,29 @@ using FR.Tools.Juice;
 
 namespace FR.Game.Units
 {
-    public class UnitSelectable : Selectable
+    public class UnitSelectable : SelectableBehaviour
     {
 
         [SerializeField] private Outline _outline;
 
-        protected override void OnBeginSelectSuccess()
+        public override void BeginSelectSuccess()
         {
             _outline.SetColor(Color.blue);
             _outline.Show();
         }
 
-        protected override void OnConfirmSelectSuccess()
+        public override void ConfirmSelectSuccess()
         {
             _outline.SetColor(Color.green);
             _outline.Show();
         }
 
-        protected override void OnCancelSelectSuccess()
+        public override void CancelSelectSuccess()
         {
             _outline.Hide();
         }
 
-        protected override void OnDeselectSuccess()
+        public override void DeselectSuccess()
         {
             _outline.Hide();
         }

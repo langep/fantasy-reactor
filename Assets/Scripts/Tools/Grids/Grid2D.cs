@@ -8,9 +8,12 @@ namespace FR.Tools.Grids
     {
         private readonly ConcurrentDictionary<Vector2Int, TCell> _cells;
 
-        public Grid2D()
+        public Vector2Int Origin { get; protected set; }
+
+        public Grid2D(Vector2Int origin = default)
         {
             _cells = new ConcurrentDictionary<Vector2Int, TCell>();
+            Origin = origin;
         }
 
         public Grid2D(ConcurrentDictionary<Vector2Int, TCell> cells)

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace FR.Tools.Selecting
 {
@@ -16,13 +15,13 @@ namespace FR.Tools.Selecting
             _selection = selection;
         }
        
-        public void BeginSelect(Selectable selectable)
+        public void BeginSelect(ISelectable selectable)
         {
             if (!CanAddOne()) return;
             selectable.BeginSelectSuccess();
         }
 
-        public void ConfirmSelect(Selectable selectable)
+        public void ConfirmSelect(ISelectable selectable)
         {
             if (!_selection.HasRoomFor(1) && _config.evictionType != EvictionType.None)
             {
@@ -35,12 +34,12 @@ namespace FR.Tools.Selecting
             }
         }
 
-        public void CancelSelect(Selectable selectable)
+        public void CancelSelect(ISelectable selectable)
         {
             selectable.CancelSelectSuccess();
         }
 
-        public void Deselect(Selectable selectable)
+        public void Deselect(ISelectable selectable)
         {
             if (_selection.Remove(selectable))
             {
@@ -48,7 +47,7 @@ namespace FR.Tools.Selecting
             }
         }
         
-        public IEnumerable<Selectable> GetAll()
+        public IEnumerable<ISelectable> GetAll()
         {
             return _selection;
         }
@@ -58,7 +57,7 @@ namespace FR.Tools.Selecting
             return _selection.Count == 0;
         }
         
-        public bool Contains(Selectable selectable)
+        public bool Contains(ISelectable selectable)
         {
             return _selection.Contains(selectable);
         }
@@ -69,7 +68,7 @@ namespace FR.Tools.Selecting
         }
         
         [CanBeNull]
-        private Selectable EvictionTarget(EvictionType evictionType) => evictionType switch
+        private ISelectable EvictionTarget(EvictionType evictionType) => evictionType switch
         {
             EvictionType.None => null,
             EvictionType.Newest => _selection.FirstOrDefault(),

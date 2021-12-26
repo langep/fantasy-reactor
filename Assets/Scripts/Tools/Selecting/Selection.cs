@@ -4,7 +4,7 @@ using FR.Tools.DataStructures;
 
 namespace FR.Tools.Selecting
 {
-    public class Selection : LimitedSizeOrderedSet<Selectable>
+    public class Selection : LimitedSizeOrderedSet<ISelectable>
     {
     }
 }

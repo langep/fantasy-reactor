@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &6306417607601720668
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878372925454402912}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5017047295911726721
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +24,6 @@ GameObject:
   - component: {fileID: 3237237841817931858}
   - component: {fileID: 2011258572639583230}
   - component: {fileID: 5680913015841300930}
-  - component: {fileID: 6182577146432804772}
   - component: {fileID: 3690888041287582467}
   - component: {fileID: 6084818904978012190}
   - component: {fileID: 1330258650681877933}
@@ -85,19 +97,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6182577146432804772
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5017047295911726721}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3690888041287582467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +240,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 932dfd016d0c9ff49b1e3ebfdeb4235f, type: 3}
+--- !u!1 &1878372925454402912 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3042668308381969221, guid: 932dfd016d0c9ff49b1e3ebfdeb4235f, type: 3}
+  m_PrefabInstance: {fileID: 3470279209121345061}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1878372925454402918 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3042668308381969219, guid: 932dfd016d0c9ff49b1e3ebfdeb4235f, type: 3}
