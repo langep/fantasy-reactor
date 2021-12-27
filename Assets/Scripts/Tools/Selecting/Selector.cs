@@ -14,6 +14,15 @@ namespace FR.Tools.Selecting
             _config = config ?? DefaultConfig;
             _selection = selection;
         }
+
+        public void Clear()
+        {
+            foreach (var selectable in _selection)
+            {
+                selectable.DeselectSuccess();
+            }
+            _selection.Clear();
+        }
        
         public void BeginSelect(ISelectable selectable)
         {

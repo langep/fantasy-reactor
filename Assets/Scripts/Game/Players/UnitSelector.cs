@@ -1,4 +1,5 @@
-﻿using FR.Tools.Selecting;
+﻿using System;
+using FR.Tools.Selecting;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -14,6 +15,12 @@ namespace FR.Game.Players
         protected void Start()
         {
             _selector = new Selector(new SingleSelection(), selectorConfig);
+        }
+
+        private void OnDisable()
+        {
+            _currentSelectable = null;
+            _selector.Clear();
         }
 
         protected void BeginAndCancelSelect([CanBeNull] ISelectable selectable)
