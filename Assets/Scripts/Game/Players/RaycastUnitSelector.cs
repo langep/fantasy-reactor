@@ -1,46 +1,64 @@
 ﻿using FR.Game.Units;
+using FR.Tools.Selecting;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace FR.Game.Players
 {
-    public class RaycastUnitSelector : UnitSelector
+    public class RaycastUnitSelector : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
+        [SerializeField] protected UnitSelectionController controller;
+        [CanBeNull] protected ISelectable previousSelectable = null;
 
+        private void OnDisable()
+        {
+            previousSelectable = null;
+        }
+        
         private void Update()
         {
             var ray = _camera.ScreenPointToRay(Input.mousePosition);
-            UpdateSelection(ray);
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                ConfirmSelectAndDeselect();
-            }
+            var selectable = AquireTarget(ray);
+            var toggledSelection = HandleSelection(selectable);
+            HandleHover(selectable, toggledSelection);
+            previousSelectable = selectable;
         }
         
-        private void HandleRaycastMiss()
+        private ISelectable AquireTarget(Ray ray)
         {
-            BeginAndCancelSelect(null);
+            if (!Physics.Raycast(ray, out var hit))
+            {
+                return null;
+            }
+            
+            var selectable = hit.transform.GetComponent<UnitSelectable>();
+            return selectable != null ? selectable : null;
+        }
+        
+
+        private bool HandleSelection(ISelectable selectable)
+        {
+            if (selectable == null) return false;
+            if (!Input.GetMouseButtonDown(0)) return false;
+
+            controller.ToggleSelect(selectable);
+            return true;
         }
 
-        private void UpdateSelection(Ray ray)
+        private void HandleHover(ISelectable selectable, bool toggledSelection)
         {
-            if (Physics.Raycast(ray, out var hit))
+            if (previousSelectable != selectable)
             {
-                var selectable = hit.transform.GetComponent<UnitSelectable>();
-                if (selectable != null)
-                {
-                    BeginAndCancelSelect(selectable);
-                }
-                else
-                {
-                    HandleRaycastMiss();                    
-                }
+                controller.HoverExit(previousSelectable);
             }
-            else
+            if (controller.SelectionContains(selectable)) return;
+            if (previousSelectable != selectable || toggledSelection)
             {
-                HandleRaycastMiss();
+                controller.HoverEnter(selectable);
             }
         }
+
+
     }
 }

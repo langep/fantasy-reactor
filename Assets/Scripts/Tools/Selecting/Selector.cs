@@ -8,29 +8,41 @@ namespace FR.Tools.Selecting
     public class Selector
     {
         private readonly Selection _selection;
+        private readonly HashSet<ISelectable> _hovering;
+
         private readonly Config _config;
         public Selector(Selection selection, Config config = null)
         {
             _config = config ?? DefaultConfig;
             _selection = selection;
+            _hovering = new HashSet<ISelectable>();
         }
-
+        
         public void Clear()
         {
             foreach (var selectable in _selection)
             {
-                selectable.DeselectSuccess();
+                selectable.Deselect();
             }
             _selection.Clear();
         }
        
-        public void BeginSelect(ISelectable selectable)
+        public void HoverEnter(ISelectable selectable)
         {
+            if (selectable == null || Contains(selectable)) return;
             if (!CanAddOne()) return;
-            selectable.BeginSelectSuccess();
+            selectable.HoverEnter();
+            _hovering.Add(selectable);
+        }
+        
+        public void HoverExit(ISelectable selectable)
+        {
+            if (selectable == null || Contains(selectable)) return;
+            selectable.HoverExit();
+            _hovering.Remove(selectable);
         }
 
-        public void ConfirmSelect(ISelectable selectable)
+        public void Select(ISelectable selectable)
         {
             if (!_selection.HasRoomFor(1) && _config.evictionType != EvictionType.None)
             {
@@ -39,20 +51,16 @@ namespace FR.Tools.Selecting
             
             if (_selection.Add(selectable))
             {
-                selectable.ConfirmSelectSuccess();   
+                selectable.Select();
+                _hovering.Remove(selectable);
             }
         }
-
-        public void CancelSelect(ISelectable selectable)
-        {
-            selectable.CancelSelectSuccess();
-        }
-
+        
         public void Deselect(ISelectable selectable)
         {
             if (_selection.Remove(selectable))
             {
-                selectable.DeselectSuccess();
+                selectable.Deselect();
             }
         }
         
@@ -68,7 +76,7 @@ namespace FR.Tools.Selecting
         
         public bool Contains(ISelectable selectable)
         {
-            return _selection.Contains(selectable);
+            return selectable != null && _selection.Contains(selectable);
         }
         
         private bool CanAddOne()
@@ -94,7 +102,7 @@ namespace FR.Tools.Selecting
             var success = _selection.Remove(evictionTarget);
             if (success)
             {
-                evictionTarget.DeselectSuccess();
+                evictionTarget.Deselect();
             }
             
             return success;

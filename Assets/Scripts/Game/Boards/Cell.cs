@@ -14,22 +14,22 @@ namespace FR.Game.Boards
             Coords = coords;
         }
 
-        public void BeginSelectSuccess()
+        public void HoverEnter()
         {
             
         }
 
-        public void ConfirmSelectSuccess()
+        public void Select()
         {
             
         }
 
-        public void CancelSelectSuccess()
+        public void HoverExit()
         {
             
         }
 
-        public void DeselectSuccess()
+        public void Deselect()
         {
             
         }

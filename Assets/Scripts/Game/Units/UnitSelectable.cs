@@ -8,25 +8,26 @@ namespace FR.Game.Units
     {
 
         [SerializeField] private Outline _outline;
-
-        public override void BeginSelectSuccess()
+        
+        
+        protected override void OnHoverEnter()
         {
             _outline.SetColor(Color.blue);
             _outline.Show();
         }
 
-        public override void ConfirmSelectSuccess()
-        {
-            _outline.SetColor(Color.green);
-            _outline.Show();
-        }
-
-        public override void CancelSelectSuccess()
+        protected override void OnHoverExit()
         {
             _outline.Hide();
         }
 
-        public override void DeselectSuccess()
+        protected override void OnSelect()
+        {
+            _outline.SetColor(Color.green);
+            _outline.Show();
+        }
+        
+        protected override void OnDeselect()
         {
             _outline.Hide();
         }
